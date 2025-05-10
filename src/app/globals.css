@@ -5,6 +5,18 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-primary: #000000;
+  --color-primary-50: #ffffff;
+  --color-primary-100: #7c93b5;
+  --color-primary-200: #dee5ed;
+  --color-primary-300: #444d64;
+  --color-primary-400: #f5f7f9;
+  --color-primary-500: #e7ecf2;
+  --color-primary-600: #2f3036;
+  --color-primary-700: #1f2024;
+  --color-primary-800: #f0f2f9;
+  --color-input: #737373;
+  --color-error: #c10007;
 }
 
 body {
