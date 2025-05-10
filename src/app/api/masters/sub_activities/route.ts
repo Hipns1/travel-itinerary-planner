@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { MasterOptions } from '@/app/api'
 import { pool } from '@/core/lib/mysql'
+import { MasterOptions } from '../general-types'
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)

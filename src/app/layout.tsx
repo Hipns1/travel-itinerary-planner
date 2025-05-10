@@ -1,4 +1,5 @@
 import './globals.css'
+import { ClientProviders } from './providers'
 
 export default function RootLayout({
   children
@@ -7,7 +8,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='es' className='min-h-screen w-full px-32 py-6'>
-      <body>{children}</body>
+      <body>
+        <ClientProviders>{children}</ClientProviders>
+      </body>
     </html>
   )
 }

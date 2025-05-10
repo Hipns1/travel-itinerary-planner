@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { MasterOptions } from '@/app/api/masters'
 import { pool } from '@/core/lib/mysql'
+import { MasterOptions } from '../general-types'
 
 export async function GET() {
   try {

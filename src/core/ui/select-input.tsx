@@ -1,3 +1,4 @@
+'use client'
 import { cn } from '@/core/lib'
 import { cloneElement, JSX, useEffect, useMemo, useRef, useState } from 'react'
 import { FieldError, Noop } from 'react-hook-form'

@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect, forwardRef } from 'react'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
@@ -6,7 +8,6 @@ import { GoChevronRight, GoChevronLeft } from 'react-icons/go'
 import { IoCalendarClearOutline } from 'react-icons/io5'
 import { cn } from '@/core/lib'
 import { Calendar, Button } from '@/core/ui'
-import { BsMenuButtonFill } from 'react-icons/bs'
 
 interface DatePickerProps {
   placeholder?: string

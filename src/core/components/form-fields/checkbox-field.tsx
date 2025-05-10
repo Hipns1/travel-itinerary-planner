@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import { Control } from 'react-hook-form'
 import { Checkbox, FormControl, FormField, FormItem, FormMessage } from '@/core/ui'

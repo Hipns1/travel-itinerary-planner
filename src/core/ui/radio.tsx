@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import { FaCheck } from 'react-icons/fa'
 import { cn } from '@/core/lib'

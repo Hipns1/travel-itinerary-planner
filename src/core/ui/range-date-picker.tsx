@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect, forwardRef } from 'react'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
