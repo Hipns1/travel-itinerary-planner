@@ -24,15 +24,14 @@ export async function POST(req: Request) {
     const body = await req.json()
     const id = uuidv4()
 
-    const data: Omit<ItemTravelProps, 'id' | 'totalActivities'> = body
+    const data: Omit<ItemTravelProps, 'id'> = body
     const { name, description, startDate, endDate } = data
-    const totalActivities = null
 
     await pool.query(
       `INSERT INTO travels 
-      (id, name, description, totalActivities, startDate, endDate) 
-      VALUES (?, ?, ?, ?, ?, ?)`,
-      [id, name, description ?? null, totalActivities, toMySQLDatetime(startDate), toMySQLDatetime(endDate)]
+      (id, name, description, startDate, endDate) 
+      VALUES (?, ?, ?, ?, ?)`,
+      [id, name, description ?? null, toMySQLDatetime(startDate), toMySQLDatetime(endDate)]
     )
 
     return NextResponse.json({ message: 'Travel created', id }, { status: 201 })
@@ -65,5 +64,35 @@ export async function DELETE(req: Request) {
   } catch (error) {
     console.error(error)
     return NextResponse.json({ message: 'Error deleting travel' }, { status: 500 })
+  }
+}
+
+export async function PUT(req: Request) {
+  try {
+    const body = await req.json()
+    const { id, name, description, startDate, endDate } = body as ItemTravelProps
+
+    if (!id) {
+      return NextResponse.json({ message: 'ID is required' }, { status: 400 })
+    }
+
+    const result: QueryResult = await pool.query(
+      `UPDATE travels SET 
+        name = ?, 
+        description = ?, 
+        startDate = ?, 
+        endDate = ? 
+      WHERE id = ?`,
+      [name, description ?? null, toMySQLDatetime(startDate), toMySQLDatetime(endDate), id]
+    )
+
+    if (result.affectedRows > 0) {
+      return NextResponse.json({ message: 'Travel updated successfully' }, { status: 200 })
+    } else {
+      return NextResponse.json({ message: 'Travel not found' }, { status: 404 })
+    }
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ message: 'Error updating travel' }, { status: 500 })
   }
 }

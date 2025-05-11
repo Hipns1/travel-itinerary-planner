@@ -3,8 +3,9 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { NewTravelProps, newTravelSchema } from '@/core/pages'
-import { postTravel } from '@/core/services'
+import { postTravel, putTravel } from '@/core/services'
 import { useHomeStore } from '@/core/lib'
+import { toast } from 'react-toastify'
 
 export const useTravel = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -27,6 +28,18 @@ export const useTravel = () => {
         await postTravel(dataTravel)
         setTravelModal({ isOpen: false, isNew: true })
         setFlagForMutation(true)
+        form.reset()
+        form.clearErrors()
+        toast.success('Viaje creado exitosamente')
+        return
+      } else {
+        await putTravel({ ...dataTravel, id: travelModal.travelSelected?.id })
+        setTravelModal({ isOpen: false, isNew: false, travelSelected: null })
+        setFlagForMutation(true)
+        form.reset()
+        form.clearErrors()
+        toast.success('Viaje actualizado exitosamente')
+        return
       }
     } catch (error) {
       console.error(error)

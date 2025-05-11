@@ -1,3 +1,5 @@
+'use client'
+import { useEffect } from 'react'
 import { DateField, InputField, Modal, TextareaField } from '@/core/components'
 import { Form } from '@/core/ui'
 import { useTravel } from '@/core/pages'
@@ -5,7 +7,8 @@ import { useHomeStore } from '@/core/lib'
 
 export const TravelModal = () => {
   const { form, onSuccess, isLoading } = useTravel()
-  const { control, handleSubmit } = form
+  const { control, handleSubmit, watch } = form
+  const travelStartDate = watch('travelStartDate')
 
   const { travelModal, setTravelModal } = useHomeStore()
 
@@ -15,6 +18,15 @@ export const TravelModal = () => {
     form.clearErrors()
   }
 
+  useEffect(() => {
+    if (!travelModal.isNew && travelModal?.travelSelected) {
+      form.setValue('travelName', travelModal?.travelSelected?.name)
+      form.setValue('travelDescription', travelModal?.travelSelected?.description ?? undefined)
+      form.setValue('travelStartDate', new Date(travelModal?.travelSelected?.startDate))
+      form.setValue('travelEndDate', new Date(travelModal?.travelSelected?.endDate))
+    }
+  }, [travelModal])
+
   return (
     <Modal
       isOpen={travelModal.isOpen}
@@ -22,10 +34,7 @@ export const TravelModal = () => {
       title={travelModal.isNew ? 'Nuevo viaje' : 'Editar viaje'}
       btnAcceptText={travelModal.isNew ? 'Crear' : 'Guardar cambios'}
       btnRejectText='Cancelar'
-      btnAcceptTextOnClick={() => {
-        handleSubmit(onSuccess)()
-        form.reset()
-      }}
+      btnAcceptTextOnClick={() => handleSubmit(onSuccess)()}
       btnRejectTextOnClick={handleClose}
       className='w-[500px]'
       isLoading={isLoading}
@@ -51,7 +60,14 @@ export const TravelModal = () => {
                   label='Fecha de inicio'
                   placeholder='Fecha de inicio'
                 />
-                <DateField control={control} name='travelEndDate' label='Fecha de fin' placeholder='Fecha de fin' />
+                <DateField
+                  control={control}
+                  name='travelEndDate'
+                  label='Fecha de fin'
+                  placeholder='Fecha de fin'
+                  minDate={travelStartDate}
+                  disabled={!travelStartDate}
+                />
               </div>
             </form>
           </Form>

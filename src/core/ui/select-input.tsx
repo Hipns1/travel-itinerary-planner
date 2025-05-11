@@ -29,7 +29,7 @@ interface SelectInputProps<Label extends string, Value extends string> {
   onBlur?: Noop
   value?: string
   error?: FieldError
-  onChange?: (...event: unknown[]) => void
+  onChange?: (value: string) => void
   items?: { [key in Label | Value]: string }[] | null
   onValueChangeCallBack?: any
   leftIcon?: JSX.Element
@@ -127,6 +127,7 @@ export const SelectInput = <Label extends string, Value extends string>(props: S
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button
+              variant='input'
               disabled={disabled || loading}
               onBlur={onBlur}
               ref={divRef}
@@ -174,7 +175,7 @@ export const SelectInput = <Label extends string, Value extends string>(props: S
           </PopoverTrigger>
           <PopoverContent
             onOpenAutoFocus={(e) => e.preventDefault()}
-            className='bg-primary-50 rounded-sm p-1'
+            className='bg-primary-50 rounded-sm border-none p-1 shadow-lg'
             style={{
               minWidth: `${width}px`,
               width: `${width}px`,

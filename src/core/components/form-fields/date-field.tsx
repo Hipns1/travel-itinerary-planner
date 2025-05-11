@@ -8,9 +8,11 @@ interface DateFieldProps {
   placeholder?: string
   disabled?: boolean
   value?: Date
+  maxDate?: Date
+  minDate?: Date
 }
 
-export const DateField = ({ control, name, label, placeholder, disabled, value }: DateFieldProps) => {
+export const DateField = ({ control, name, label, placeholder, disabled, value, maxDate, minDate }: DateFieldProps) => {
   return (
     <FormField
       control={control}
@@ -34,6 +36,8 @@ export const DateField = ({ control, name, label, placeholder, disabled, value }
               }}
               value={field.value ?? value}
               placeholder={placeholder}
+              maxDate={maxDate}
+              minDate={minDate}
             />
           </FormControl>
           <FormMessage />

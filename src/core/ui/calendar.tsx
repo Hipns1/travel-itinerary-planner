@@ -57,7 +57,7 @@ function Calendar({ className, classNames, minDate, maxDate, showOutsideDays = t
             ? '[&:has(>.day-range-end)]:rounded-r-xl [&:has(>.day-range-start)]:rounded-l-xl first:[&:has([aria-selected])]:rounded-l-xl last:[&:has([aria-selected])]:rounded-r-xl'
             : '[&:has([aria-selected])]:rounded-xl'
         ),
-        day: cn('h-8 w-8 p-0 font-normal aria-selected:opacity-100'),
+        day: cn('h-8 w-8 p-0 font-normal aria-selected:opacity-100 cursor-pointer'),
         day_range_start: 'day-range-start',
         day_range_end: 'day-range-end',
         day_selected:

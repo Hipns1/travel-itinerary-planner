@@ -14,6 +14,8 @@ interface ModalProps {
   children?: ReactNode | string
   childrenClassName?: string
   btnAcceptText?: string
+  isAbleAcceptBtn?: boolean
+  isShowAcceptBtn?: boolean
   btnAcceptTextClassName?: string
   btnAcceptTextOnClick?: () => void
   btnRejectText?: string | boolean
@@ -34,6 +36,8 @@ export const Modal = ({
   children,
   childrenClassName,
   btnAcceptText = 'Aceptar',
+  isAbleAcceptBtn = true,
+  isShowAcceptBtn = true,
   btnAcceptTextClassName,
   btnAcceptTextOnClick,
   btnRejectText,
@@ -86,14 +90,16 @@ export const Modal = ({
               {btnRejectText}
             </Button>
           )}
-          <Button
-            disabled={isLoading}
-            className={cn('flex h-10 w-40 gap-2', btnAcceptTextClassName)}
-            onClick={btnAcceptTextOnClick}
-          >
-            {isLoading && <Spinner size='sm' />}
-            {btnAcceptText}
-          </Button>
+          {isShowAcceptBtn && (
+            <Button
+              disabled={isLoading || !isAbleAcceptBtn}
+              className={cn('flex w-48 gap-2', btnAcceptTextClassName)}
+              onClick={btnAcceptTextOnClick}
+            >
+              {isLoading && <Spinner size='sm' />}
+              {btnAcceptText}
+            </Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>
