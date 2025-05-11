@@ -96,7 +96,7 @@ export const RangeDatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
               search={true}
               value={selectedYear.toString()}
               items={years}
-              onChange={(value) => handleYearChange(value as number)}
+              onChange={(value) => handleYearChange(Number(value))}
               className='mb-6'
             />
             <div className='relative pt-0.5'>
