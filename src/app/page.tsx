@@ -10,7 +10,6 @@ export default function Home() {
 
   return (
     <div className='flex flex-col gap-y-6'>
-      <h1 className='self-center text-3xl font-bold'>Planificador de viajes</h1>
       <div className='flex items-center justify-between gap-4'>
         <p className='text-2xl font-bold'>Mis viajes</p>
         <Button onClick={() => setTravelModal({ isOpen: true, isNew: true })} className='gap-4'>

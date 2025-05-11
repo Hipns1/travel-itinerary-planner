@@ -1,9 +1,12 @@
 'use client'
+import { getSingleTravel } from '@/core/services'
 import { useParams } from 'next/navigation'
 
 export default function TravelPage() {
   const { travelId } = useParams()
   console.log(travelId)
 
-  return <div>Hola</div>
+  const { data: travel } = getSingleTravel(travelId)
+
+  return <div>{travel?.name}</div>
 }
