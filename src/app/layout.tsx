@@ -10,7 +10,6 @@ export default function RootLayout({
     <html lang='es'>
       <body>
         <div className='flex min-h-screen w-full flex-col gap-6 px-32 py-6'>
-          <h1 className='text-center text-3xl font-bold'>Planificador de viajes</h1>
           <ClientProviders>{children}</ClientProviders>
         </div>
       </body>
