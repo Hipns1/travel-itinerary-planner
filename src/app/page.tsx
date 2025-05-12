@@ -3,6 +3,7 @@ import { MyTravels, TravelModal } from '@/core/pages'
 import { useHomeStore, useResetStoreOnLocationChange } from '@/core/lib/stores'
 import { Button } from '@/core/ui'
 import { FaPlus } from 'react-icons/fa6'
+import { signOut } from 'next-auth/react'
 
 export default function Home() {
   const { setTravelModal, resetStore } = useHomeStore()
@@ -19,6 +20,8 @@ export default function Home() {
       </div>
       <MyTravels />
       <TravelModal />
+
+      <Button onClick={async () => await signOut({ redirectTo: '/login' })}>Logout</Button>
     </div>
   )
 }
